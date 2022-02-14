@@ -18,13 +18,14 @@ public class ObjectTilter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(agent.remainingDistance<2.0f) return;
         var isHit = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit);
         var normal = hit.normal;
 
 
         if(isHit)
         {
-            Vector3 direction = agent.steeringTarget - transform.position;
+            Vector3 direction = agent.velocity;
             direction.y = 0.0f;
             if(direction.magnitude > 0.1f || normal.magnitude > 0.1f) 
             {
@@ -33,7 +34,7 @@ public class ObjectTilter : MonoBehaviour
                 lookRotation = qNorm * qLook;
             }
             // soften the orientation
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime/0.2f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime/0.1f);
         }
     }
 

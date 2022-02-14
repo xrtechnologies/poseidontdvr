@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5914194718571780881}
   - component: {fileID: 5914194718571780894}
-  - component: {fileID: 5914194718571780880}
+  - component: {fileID: 2062106451}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -75,8 +75,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 100
-  m_Acceleration: 30
+  m_Speed: 50
+  m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -87,7 +87,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5914194718571780880
+--- !u!114 &2062106451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,10 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5914194718571780895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fa470941807c3d4ca17a00b5d81bb7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 07be5454bd1fe9b4aa87cf3141d4081c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {fileID: 0}
+  waypoints: []
 --- !u!1 &5914194718793886327
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 5914194718793886326}
   - component: {fileID: 5914194718793886315}
   - component: {fileID: 5914194718793886312}
-  - component: {fileID: 5914194718793886313}
   - component: {fileID: 5914194718793886314}
   m_Layer: 0
   m_Name: Cube
@@ -187,19 +186,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5914194718793886313
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5914194718793886327}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5914194718793886314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,7 +437,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7571078247931879665, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 2500264164858626454, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 4386442066936713644, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
 --- !u!4 &2727569126765380833 stripped
 Transform:
@@ -465,6 +454,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5914194719025638497}
     m_Modifications:
+    - target: {fileID: 6234280270765908881, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+      propertyPath: BaseSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7484424603412241098, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
       propertyPath: m_Name
       value: LeftBackWheel (1)
@@ -517,7 +510,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2500264164858626454, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 4386442066936713644, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 7571078247931879665, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
 --- !u!4 &2727569125521397201 stripped
 Transform:
@@ -587,7 +583,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7571078247931879665, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 2500264164858626454, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 4386442066936713644, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
 --- !u!4 &2727569125096201919 stripped
 Transform:
@@ -601,6 +600,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5914194718524812856}
     m_Modifications:
+    - target: {fileID: 6234280270765908881, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+      propertyPath: BaseSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7484424603412241098, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
       propertyPath: m_Name
       value: LeftBackWheel (1)
@@ -653,7 +656,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7571078247931879665, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 2500264164858626454, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
+    - {fileID: 4386442066936713644, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0e053dca23837742ae160d8488b1be8, type: 3}
 --- !u!4 &2727569126107501536 stripped
 Transform:

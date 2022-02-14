@@ -11,6 +11,7 @@ public class pathfinding : MonoBehaviour
             var child2 = transform.GetChild(i >= transform.childCount - 1 ? 0 : i + 1);
             
             GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere.GetComponent<SphereCollider>().enabled = false;
             sphere.transform.localScale = new Vector3(10f,10f,10f);
             sphere.transform.position = child.transform.position;
             /*if(i < transform.childCount - 1) {
