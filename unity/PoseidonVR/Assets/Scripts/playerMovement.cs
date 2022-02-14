@@ -27,7 +27,6 @@ public class playerMovement : MonoBehaviour
     void Update()
     {
         if(agent.remainingDistance < 1f && currentWaypoint < waypoints.Count - 1){
-            Debug.Log("failed" + currentWaypoint);
             currentWaypoint ++;
             agent.SetDestination(waypoints[currentWaypoint].transform.position);
         }
