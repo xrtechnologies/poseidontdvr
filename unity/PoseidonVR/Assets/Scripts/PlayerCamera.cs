@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -22,10 +23,14 @@ public class PlayerCamera : MonoBehaviour
             RaycastHit rHit;
             NavMeshHit nHit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out hit)){
+            if(Physics.Raycast(ray, out rHit)){
                 Vector3 pos = rHit.point;
-                GameObject temp = Instantiate(tower);
-                temp.transform.position = pos;
+                Transform t = rHit.transform;
+                
+                if(NavMesh.SamplePosition(pos, out nHit, 1f, NavMesh.AllAreas)){
+                    GameObject temp = Instantiate(tower);
+                    temp.transform.position = pos;
+                }
             }
         }
     }
