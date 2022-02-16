@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2675037514738024852}
   - component: {fileID: 2675037514738024853}
   - component: {fileID: 2675037514738024854}
+  - component: {fileID: 2893142896555485575}
+  - component: {fileID: 7020486791504660611}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -97,4 +99,33 @@ CapsuleCollider:
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &2893142896555485575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675037514738024855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7235f9750e181e46b05b3580e3747fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targeting: first
+  shotDelay: 0.2
+  targets: []
+  currTarget: {fileID: 0}
+--- !u!135 &7020486791504660611
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675037514738024855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5.3
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
