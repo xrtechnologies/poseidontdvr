@@ -34,10 +34,4 @@ public class enemySpawner : MonoBehaviour
             StartCoroutine(spawnEnemy(currentWave + 1, delayBetweenWaves));
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
