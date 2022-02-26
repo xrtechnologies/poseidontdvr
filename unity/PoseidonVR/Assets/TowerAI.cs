@@ -51,18 +51,20 @@ public class TowerAI : MonoBehaviour
     */
 
     IEnumerator shoot(string currTargeting, float delay){
-        yield return new WaitForSeconds(delay);
-        if(targets.Count > 0){
-            switch(currTargeting){
-                case "first":
-                    currTarget = targets[0];
-                    break;
+        while(true){
+            yield return new WaitForSeconds(delay);
+            if(targets.Count > 0){
+                switch(currTargeting){
+                    case "first":
+                        currTarget = targets[0];
+                        break;
+                }
+                tester ++;
+                Debug.Log("shooting" + tester);  
+            } else {
+                shooting = false;
             }
-            tester ++;
-            Debug.Log("shooting" + tester);  
-            StartCoroutine(shoot(targeting, delay));
-        } else {
-            shooting = false;
         }
+        
     }
 }
