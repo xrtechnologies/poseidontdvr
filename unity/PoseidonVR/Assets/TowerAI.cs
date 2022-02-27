@@ -6,14 +6,18 @@ public class TowerAI : MonoBehaviour
 {   
     [SerializeField] string targeting = "first";
     [SerializeField] float shotDelay;
-    private int tester = 0;
+    
+    public List<Transform> cannons;
     public List<GameObject> targets;
     public GameObject currTarget;
+    
+    private int tester = 0;
     private bool shooting = false;
 
-    void Start()
-    {
-        
+    void Start(){
+        foreach(Transform child in transform){
+            cannons.Add(child);
+        }
     }
 
     void OnTriggerEnter(Collider col){
@@ -35,23 +39,9 @@ public class TowerAI : MonoBehaviour
             StartCoroutine(shoot(targeting, shotDelay));
         }
     }
-    /*
-    IEnumerator spawnEnemy(int currentWave, float delay){
-        yield return new WaitForSeconds(delay);
-        if(enemyAmount[currentWave] > 0){
-            GameObject currentEnemy = Instantiate(enemyType[currentWave]);
-            currentEnemy.transform.position = pathStart.transform.position;
-            currentEnemy.transform.localScale = scale[currentWave];
-            StartCoroutine(spawnEnemy(currentWave, densityDelay[currentWave]));
-            enemyAmount[currentWave] --;
-        } else if (currentWave < enemyType.Count - 1) {
-            StartCoroutine(spawnEnemy(currentWave + 1, delayBetweenWaves));
-        }
-    }
-    */
 
     IEnumerator shoot(string currTargeting, float delay){
-        while(true){
+        while(shooting){
             yield return new WaitForSeconds(delay);
             if(targets.Count > 0){
                 switch(currTargeting){
@@ -59,12 +49,25 @@ public class TowerAI : MonoBehaviour
                         currTarget = targets[0];
                         break;
                 }
-                tester ++;
-                Debug.Log("shooting" + tester);  
+
+                foreach(Transform cannon in cannons){
+                    var child = cannon.GetChild(0).gameObject.transform;
+                    angleCannon(child);
+                }  
             } else {
                 shooting = false;
             }
         }
         
+    }
+
+    void angleCannon(Transform cTransform){
+        Vector3 dir = -(targets[0].transform.position - cTransform.position).normalized;
+        Quaternion test = cTransform.rotation;
+        cTransform.rotation = Quaternion.LookRotation(dir);
+        Debug.Log(cTransform.localEulerAngles.y);
+        if(cTransform.localEulerAngles.y - 360 < -30 || cTransform.localEulerAngles.y - 360 > 30){
+            cTransform.rotation = test;
+        }
     }
 }

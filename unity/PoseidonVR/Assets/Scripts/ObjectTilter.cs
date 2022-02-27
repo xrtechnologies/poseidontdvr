@@ -22,7 +22,6 @@ public class ObjectTilter : MonoBehaviour
         var isHit = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit);
         var normal = hit.normal;
 
-
         if(isHit)
         {
             Vector3 direction = agent.velocity;
