@@ -28,8 +28,15 @@ public class TowerAI : MonoBehaviour
         }    
     }
 
-    void Update()
-    {
+    void FixedUpdate(){
+        for(int i = targets.Count - 1; i > -1; i--){
+            if(targets[i] == null){
+                targets.RemoveAt(i);
+            }
+        }
+    }
+
+    void Update(){
         if(targets.Count > 0 && shooting == false){
             shooting = true;
             StartCoroutine(shoot(targeting, shotDelay));
@@ -39,6 +46,9 @@ public class TowerAI : MonoBehaviour
 
     //todo: make "first" target not only first in the list but also first in the game => consider distance from next NavMesh point and index of NavMesh point
     IEnumerator shoot(string currTargeting, float delay){
+
+        if(targets.Count == 0) yield break;
+
         while(shooting){
             yield return new WaitForSeconds(delay);
             if(targets.Count > 0){
