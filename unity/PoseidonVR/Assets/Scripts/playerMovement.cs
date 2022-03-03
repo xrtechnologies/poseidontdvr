@@ -9,7 +9,7 @@ public class playerMovement : MonoBehaviour
     private GameObject path;
     public List<Transform> waypoints;
     public float Speed = 1.0f;
-    private int currentWaypoint = 0; 
+    public int currentWaypoint = 0; 
     private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()

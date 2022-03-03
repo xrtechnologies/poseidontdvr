@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TowerAI : MonoBehaviour
@@ -69,21 +70,39 @@ public class TowerAI : MonoBehaviour
 
     // todo make cannon target only enemies it can also hit
     // idea: when out of range choose next one in List (potentially a loop)
-    void targetEnemy(Transform bTransform){
-
+    void targetEnemy(Transform bTransform)
+    {
         Quaternion temp = bTransform.rotation;
 
-        for(int i = 0; i < targets.Count; i ++){
+        // LINQ: Checkout
+        // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries
+
+        var orderedTargets = targets
+            .Select(target => target.GetComponent<playerMovement>())
+            .Select(playerMovement => new
+            {
+                NextWaypointIndex = playerMovement.currentWaypoint,
+                DistanceToNextWaypoint = CalculateDistanceToNextWaypoint(playerMovement)
+            })
+            .OrderBy(nextWaypoint => nextWaypoint.NextWaypointIndex * 1000000 + nextWaypoint.DistanceToNextWaypoint)
+            .ToList();
+
+        for (int i = 0; i < orderedTargets
+        .Count; i++)
+        {
             Vector3 dir = -(targets[i].transform.position - bTransform.position).normalized;
             bTransform.rotation = Quaternion.LookRotation(dir);
             //checks angle of the barrel and sets currTarget to the first target with angle < 60°
             //todo: fix the fact that it only checks if the angle > -30° since positive values dont seem to show up 
-            if(bTransform.localEulerAngles.y - 360 > -30 && bTransform.localEulerAngles.y - 360 < 30){
+            if (bTransform.localEulerAngles.y - 360 > -30 && bTransform.localEulerAngles.y - 360 < 30)
+            {
                 currTarget = targets[i];
                 break;
             }
             bTransform.rotation = temp;
-            
         }
-    }
+   }
+
+    private static float CalculateDistanceToNextWaypoint(playerMovement playerMovement) =>
+        Vector3.Distance(playerMovement.waypoints[playerMovement.currentWaypoint].transform.position, playerMovement.transform.position);
 }
