@@ -46,7 +46,6 @@ public class TowerAI : MonoBehaviour
 
     //todo: make "first" target not only first in the list but also first in the game => consider distance from next NavMesh point and index of NavMesh point
     IEnumerator shoot(string currTargeting, float delay){
-
         if(targets.Count == 0) yield break;
 
         while(shooting){
@@ -70,7 +69,6 @@ public class TowerAI : MonoBehaviour
     // todo make cannon target only enemies it can also hit
     // idea: when out of range choose next one in List (potentially a loop)
     void targetEnemy(Transform bTransform){
-
         Quaternion temp = bTransform.rotation;
 
         for(int i = 0; i < targets.Count; i ++){

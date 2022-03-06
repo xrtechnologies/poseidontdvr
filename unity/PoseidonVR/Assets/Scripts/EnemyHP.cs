@@ -11,8 +11,7 @@ public class EnemyHP : MonoBehaviour
         currentHP = maxHP;
     }
 
-    void OnParticleCollision(GameObject other)
-    {
+    void OnParticleCollision(GameObject other){
         takeDamage();    
     }
 
