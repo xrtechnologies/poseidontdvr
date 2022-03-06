@@ -11,10 +11,14 @@ public class TowerAI : MonoBehaviour
     public List<GameObject> targets;
     public GameObject currTarget;
     
+    private ParticleSystem particles;
     private int tester = 0;
     private bool shooting = false;
 
     void Start(){
+            //prevents cannons from shooting without a target
+            particles = transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+            particles.Stop();
     }
 
     void OnTriggerEnter(Collider col){
@@ -69,19 +73,17 @@ public class TowerAI : MonoBehaviour
 
     // todo make cannon target only enemies it can also hit
     // idea: when out of range choose next one in List (potentially a loop)
-<<<<<<< HEAD
-    void targetEnemy(Transform bTransform){
-=======
     void targetEnemy(Transform bTransform)
     {
->>>>>>> b66c2fc51be00550af0a0929e30658cd256bf80c
         Quaternion temp = bTransform.rotation;
 
         // LINQ: Checkout
         // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/introduction-to-linq-queries
+        if(targets.Count == 0) return;
+
 
         var orderedTargets = targets
-            .Select(target => target.GetComponent<playerMovement>())
+            .Select(target => target.gameObject.GetComponent<playerMovement>())
             .Select(playerMovement => new
             {
                 NextWaypointIndex = playerMovement.currentWaypoint,
@@ -99,9 +101,12 @@ public class TowerAI : MonoBehaviour
             //todo: fix the fact that it only checks if the angle > -30° since positive values dont seem to show up 
             if (bTransform.localEulerAngles.y - 360 > -30 && bTransform.localEulerAngles.y - 360 < 30)
             {
+                //cannons are only supposed to shoot when they have a target, needs to be tested after targeting is fixed
+                particles.Play();
                 currTarget = targets[i];
                 break;
             }
+            particles.Stop();
             bTransform.rotation = temp;
         }
    }
