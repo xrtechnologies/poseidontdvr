@@ -12,7 +12,6 @@ public class TowerAI : MonoBehaviour
     public GameObject currTarget;
     
     private ParticleSystem particles;
-    private int tester = 0;
     private bool shooting = false;
 
     void Start(){
