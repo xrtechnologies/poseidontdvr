@@ -29,6 +29,10 @@ public class enemySpawner : MonoBehaviour
 
                     GameObject currentEnemy = Instantiate(enemyPrefab);
                     var movementScript = currentEnemy.GetComponent<playerMovement>();
+                    if(currentEnemy.name == "Player(Clone)"){
+                        var particleSystem = currentEnemy.GetComponent<ParticleSystem>();
+                        particleSystem.Stop();
+                    }
                     movementScript.Speed = wavePart.Speed;
                     currentEnemy.transform.position = pathStart.transform.position;
                     currentEnemy.transform.localScale = wavePart.Scale;

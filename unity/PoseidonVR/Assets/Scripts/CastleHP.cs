@@ -6,6 +6,7 @@ public class CastleHP : MonoBehaviour
 {
     [SerializeField] int maxHP = 100;
     [SerializeField] int regenAmount = 2;
+    [SerializeField] GameObject deathParticle;
     public bool castleBreached = false;
     private int damageToTake = 0;
     private int currentHP = 0;
@@ -19,8 +20,12 @@ public class CastleHP : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         Debug.Log("ouch");
-        damageToTake = col.gameObject.transform.parent.GetComponent<SiegeBehaviour>().cartExplosionDamage;
-        Destroy(col.gameObject.transform.parent.gameObject);
+        Transform parent = col.gameObject.transform.parent;
+        damageToTake = parent.GetComponent<SiegeBehaviour>().cartExplosionDamage;
+        GameObject particle = Instantiate(deathParticle, parent.position, parent.rotation);
+        particle.transform.GetChild(0).transform.localScale = new Vector3(10f, 10f, 10f);
+        Destroy(particle, 3f);
+        Destroy(parent.gameObject);
         Debug.Log("HP left: " + currentHP);
         TakeDamage(damageToTake);
     }
