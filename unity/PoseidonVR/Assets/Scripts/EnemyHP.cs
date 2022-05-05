@@ -11,8 +11,9 @@ public class EnemyHP : MonoBehaviour
         currentHP = maxHP;
     }
 
+    //weirdly triggers when a particle spawned from the enemy itself hits a collider
     void OnParticleCollision(GameObject other){
-        takeDamage();    
+        takeDamage();   
     }
 
     void takeDamage(){

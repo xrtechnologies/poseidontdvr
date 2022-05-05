@@ -41,7 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5914194718571780881}
   - component: {fileID: 5914194718571780894}
-  - component: {fileID: 2062106451}
+  - component: {fileID: 2391225056142137983}
+  - component: {fileID: 734589936536524954}
   m_Layer: 0
   m_Name: Cart
   m_TagString: Enemy
@@ -86,7 +87,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2062106451
+--- !u!114 &2391225056142137983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,6 +101,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   Speed: 1
+  currentWaypoint: 0
+--- !u!114 &734589936536524954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914194718571780895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba09a684f1f7a5044951f47ca2d3189e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halfAttackDelay: 0.5
+  maxCartExplosionDamage: 15
+  cartExplosionDamage: 0
+  reachedPointBeforeCastle: 0
 --- !u!1 &5914194718793886327
 GameObject:
   m_ObjectHideFlags: 0
