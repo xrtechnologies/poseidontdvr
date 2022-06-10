@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHP : MonoBehaviour
 {
     [SerializeField] int maxHP = 1;
-    int currentHP = 0;
+    public int currentHP = 0;
     
     void Start(){
         currentHP = maxHP;
@@ -16,7 +16,7 @@ public class EnemyHP : MonoBehaviour
         takeDamage();   
     }
 
-    void takeDamage(){
+    public void takeDamage(){
         currentHP --;
             if(currentHP <= 0){
                 Destroy(gameObject);
