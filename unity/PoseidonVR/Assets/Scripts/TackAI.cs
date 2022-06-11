@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class TackAI : MonoBehaviour
 {
-    public bool shooting = false;
     public List<GameObject> targets;
     public float attackSpeed;
-
-    // Start is called before the first frame update
+    private bool canAttack = false;
+    public GameObject particleParent;
+    private ParticleSystem particle;
+    void Start()
+    {
+        particle = particleParent.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        StartCoroutine(Fire());
+    }
     void Update(){
-        if(targets.Count > 0){
-            if(shooting == false) StartCoroutine(Fire());
-            shooting = true;
-            foreach(GameObject obj in targets){
-                if(obj == null) targets.Remove(obj);
+        foreach(GameObject tar in targets){
+            if (tar == null){
+                targets.Remove(tar);
             }
-        } else {
-            shooting = false;
-            StopCoroutine(Fire());
+        }
+        if(targets.Count > 0 && canAttack){
+            particle.Emit(1);
+            foreach(GameObject obj in targets){
+                obj.GetComponent<EnemyHP>().takeDamage();
+            }
+            canAttack = false;
         }
     }
 
     IEnumerator Fire(){
         while(true){
-            if(shooting){
-                foreach(GameObject obj in targets){
-                    obj.GetComponent<EnemyHP>().takeDamage();
-                }
-            }
-            Debug.Log("fuck");
+            canAttack = true;
             yield return new WaitForSeconds(attackSpeed);
         }
     }
